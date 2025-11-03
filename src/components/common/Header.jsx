@@ -33,7 +33,7 @@ const navigationItems = [
   { label: 'Exercises', path: '/exercises', icon: <FitnessCenter /> },
   { label: 'Nutrition', path: '/nutrition', icon: <Restaurant /> },
   { label: 'Progress', path: '/progress', icon: <TrendingUp /> },
-  { label: 'Goals', path: '/goals', icon: <Target /> },
+  { label: 'Goals', path: '/goals', icon: <EmojiEvents /> },
   { label: 'Profile', path: '/profile', icon: <Person /> },
 ];
 
