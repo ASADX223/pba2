@@ -79,7 +79,7 @@ function Profile() {
               </div>
               <div className="form-group">
                 <label>Height</label>
-                <input type="text" className="form-control" defaultValue="5'10"" />
+                <input type="text" className="form-control" defaultValue="5'10" />
               </div>
               <div className="form-group">
                 <label>Weight (lbs)</label>
