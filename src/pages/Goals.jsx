@@ -91,7 +91,7 @@ function Goals() {
               <Card>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                    <Target sx={{ mr: 1, color: 'primary.main' }} />
+                    <EmojiEvents sx={{ mr: 1, color: 'primary.main' }} />
                     <Typography variant="h6" component="div">
                       {goal.title}
                     </Typography>
