@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Typography,
@@ -9,45 +9,47 @@ import {
   CardContent,
   CardMedia,
   Chip,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from '@mui/material';
-import { FitnessCenter } from '@mui/icons-material';
+import { FitnessCenter, Search } from '@mui/icons-material';
+import { exercises, exerciseCategories, equipmentTypes, difficultyLevels } from '../data/exercises.js';
+import { useLocalStorage } from '../hooks/useLocalStorage.js';
 
 function Exercises() {
-  // Mock exercise data
-  const exercises = [
-    {
-      id: 1,
-      name: 'Bench Press',
-      category: 'Chest',
-      equipment: 'Barbell',
-      difficulty: 'Intermediate',
-      muscleGroups: ['Chest', 'Triceps', 'Shoulders'],
-    },
-    {
-      id: 2,
-      name: 'Squats',
-      category: 'Legs',
-      equipment: 'Barbell',
-      difficulty: 'Intermediate',
-      muscleGroups: ['Quadriceps', 'Glutes', 'Hamstrings'],
-    },
-    {
-      id: 3,
-      name: 'Deadlifts',
-      category: 'Back',
-      equipment: 'Barbell',
-      difficulty: 'Advanced',
-      muscleGroups: ['Back', 'Glutes', 'Hamstrings'],
-    },
-    {
-      id: 4,
-      name: 'Pull-ups',
-      category: 'Back',
-      equipment: 'Bodyweight',
-      difficulty: 'Intermediate',
-      muscleGroups: ['Back', 'Biceps'],
-    },
-  ];
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
+  const [equipmentFilter, setEquipmentFilter] = useState('');
+  const [difficultyFilter, setDifficultyFilter] = useState('');
+  const [favorites, setFavorites] = useLocalStorage('fittrack_exercise_favorites', []);
+
+  // Filter exercises based on search and filters
+  const filteredExercises = exercises.filter(exercise => {
+    const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         exercise.instructions.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = !categoryFilter || exercise.category === categoryFilter;
+    const matchesEquipment = !equipmentFilter || exercise.equipment === equipmentFilter;
+    const matchesDifficulty = !difficultyFilter || exercise.difficulty === difficultyFilter;
+
+    return matchesSearch && matchesCategory && matchesEquipment && matchesDifficulty;
+  });
+
+  const toggleFavorite = (exerciseId) => {
+    const newFavorites = favorites.includes(exerciseId)
+      ? favorites.filter(id => id !== exerciseId)
+      : [...favorites, exerciseId];
+    setFavorites(newFavorites);
+  };
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setCategoryFilter('');
+    setEquipmentFilter('');
+    setDifficultyFilter('');
+  };
 
   return (
     <Container maxWidth="lg">
