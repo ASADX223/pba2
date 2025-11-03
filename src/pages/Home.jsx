@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Typography,
@@ -19,27 +19,69 @@ import {
   Add,
 } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
+import { useLocalStorage, useNutritionState } from '../hooks/useLocalStorage';
+import { sampleWorkouts } from '../data/sampleWorkouts';
+import { calculateWorkoutStreak, calculateWorkoutVolume, formatDate } from '../utils/calculations';
 
 function Home() {
-  // Mock data - will be replaced with real data from localStorage
-  const stats = {
-    weeklyWorkouts: 4,
-    totalVolume: 15420,
-    currentStreak: 7,
-    caloriesBurned: 2840,
-  };
+  const [stats, setStats] = useState({
+    weeklyWorkouts: 0,
+    totalVolume: 0,
+    currentStreak: 0,
+    caloriesBurned: 0,
+  });
 
-  const recentWorkouts = [
-    { name: 'Upper Body Push', date: '2025-01-14', duration: 45 },
-    { name: 'Lower Body', date: '2025-01-13', duration: 50 },
-    { name: 'Cardio + Core', date: '2025-01-12', duration: 30 },
-  ];
+  const [recentWorkouts, setRecentWorkouts] = useState([]);
+  const [todayGoals, setTodayGoals] = useState([]);
+  const [workoutHistory, setWorkoutHistory] = useLocalStorage('fittrack_workout_history', []);
+  const { getDailyLog } = useNutritionState();
 
-  const todayGoals = [
-    { name: 'Complete workout', completed: true },
-    { name: 'Log meals', completed: false },
-    { name: 'Drink 8 glasses of water', completed: false },
-  ];
+  useEffect(() => {
+    // Calculate stats from workout history
+    const history = workoutHistory.length > 0 ? workoutHistory : sampleWorkouts;
+
+    // Calculate weekly workouts (last 7 days)
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+    const weeklyWorkouts = history.filter(workout =>
+      new Date(workout.date) >= sevenDaysAgo
+    ).length;
+
+    // Calculate total volume from recent workouts
+    const totalVolume = history.slice(0, 5).reduce((total, workout) => {
+      return total + (workout.totalVolume || calculateWorkoutVolume(workout.exercises));
+    }, 0);
+
+    // Calculate current streak
+    const currentStreak = calculateWorkoutStreak(history);
+
+    // Calculate calories burned
+    const caloriesBurned = history.slice(0, 5).reduce((total, workout) => {
+      return total + (workout.caloriesBurned || 250);
+    }, 0);
+
+    setStats({
+      weeklyWorkouts,
+      totalVolume,
+      currentStreak,
+      caloriesBurned,
+    });
+
+    // Set recent workouts
+    setRecentWorkouts(history.slice(0, 3).map(workout => ({
+      name: workout.name,
+      date: formatDate(workout.date, 'medium'),
+      duration: Math.round((workout.duration || 3600) / 60),
+    })));
+
+    // Set today's goals
+    const todayLog = getDailyLog();
+    setTodayGoals([
+      { name: 'Complete workout', completed: weeklyWorkouts > 0 },
+      { name: 'Log meals', completed: todayLog.meals.length > 0 },
+      { name: `Drink 8 glasses of water (${todayLog.water || 0}/8)`, completed: (todayLog.water || 0) >= 8 },
+    ]);
+  }, [workoutHistory, getDailyLog]);
 
   return (
     <Container maxWidth="lg">
