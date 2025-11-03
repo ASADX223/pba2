@@ -112,11 +112,15 @@ function App() {
         <div className="App">
           <Header />
           <main className="main-content">
-            {/* Routes will go here */}
-            <div style={{ padding: '20px', textAlign: 'center' }}>
-              <h1>FitTrack Pro</h1>
-              <p>Intelligent Gym Tracking Platform</p>
-            </div>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/workout" element={<Workout />} />
+              <Route path="/exercises" element={<Exercises />} />
+              <Route path="/nutrition" element={<Nutrition />} />
+              <Route path="/progress" element={<Progress />} />
+              <Route path="/goals" element={<Goals />} />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
           </main>
           <Footer />
         </div>
