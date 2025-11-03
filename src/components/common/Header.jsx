@@ -22,7 +22,7 @@ import {
   TrendingUp,
   Restaurant,
   Timeline,
-  Target,
+  EmojiEvents,
   Person,
 } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
