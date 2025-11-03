@@ -1,4 +1,3 @@
-import { generateWorkoutRecommendations } from './storage.js';
 
 // Workout volume calculations
 export const calculateExerciseVolume = (sets) => {
