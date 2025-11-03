@@ -10,7 +10,7 @@ import {
   Button,
   LinearProgress,
 } from '@mui/material';
-import { Add, Target } from '@mui/icons-material';
+import { Add, EmojiEvents } from '@mui/icons-material';
 
 function Goals() {
   // Mock goals data
