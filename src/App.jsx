@@ -1,11 +1,20 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 // Import components (will create these next)
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+
+// Import page components (will create these next)
+import Home from './pages/Home';
+import Workout from './pages/Workout';
+import Exercises from './pages/Exercises';
+import Nutrition from './pages/Nutrition';
+import Progress from './pages/Progress';
+import Goals from './pages/Goals';
+import Profile from './pages/Profile';
 
 // Create custom theme for FitTrack Pro
 const theme = createTheme({
