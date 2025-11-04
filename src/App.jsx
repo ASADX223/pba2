@@ -7,12 +7,11 @@ import Footer from './components/Footer';
 
 // Import page components
 import Home from './pages/Home';
-import Workout from './pages/Workout';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import Exercises from './pages/Exercises';
 import Nutrition from './pages/Nutrition';
 import Progress from './pages/Progress';
-import Goals from './pages/Goals';
-import Profile from './pages/Profile';
 
 function App() {
   return (
