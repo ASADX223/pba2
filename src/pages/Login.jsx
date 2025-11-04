@@ -56,7 +56,16 @@ function Login() {
       setIsSubmitting(true);
       // Simulate API call
       setTimeout(() => {
-        alert('Login successful! (This is a demo - actual authentication would be implemented here)');
+        const userData = {
+          id: 1,
+          firstName: 'John',
+          lastName: 'Doe',
+          email: formData.email,
+          joinDate: new Date().toISOString()
+        };
+
+        login(userData);
+        navigate('/');
         setIsSubmitting(false);
       }, 1000);
     } else {
