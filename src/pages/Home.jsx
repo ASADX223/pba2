@@ -1,13 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 function Home() {
+  const { user, isAuthenticated } = useAuth();
+
   return (
     <div className="container">
       {/* Welcome Section */}
       <section className="text-center mb-4">
-        <h1>Welcome to Gym Tracker</h1>
-        <p className="text-secondary">Your intelligent gym tracking companion for optimized workouts and recovery.</p>
+        <h1>
+          {isAuthenticated
+            ? `Welcome back, ${user.firstName}!`
+            : 'Welcome to Gym Tracker'
+          }
+        </h1>
+        <p className="text-secondary">
+          {isAuthenticated
+            ? 'Track your fitness journey and achieve your goals!'
+            : 'Your intelligent gym tracking companion for optimized workouts and recovery.'
+          }
+        </p>
       </section>
 
       {/* Stats Grid */}
