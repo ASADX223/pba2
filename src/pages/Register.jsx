@@ -79,7 +79,16 @@ function Register() {
       setIsSubmitting(true);
       // Simulate API call
       setTimeout(() => {
-        alert('Registration successful! (This is a demo - actual registration would be implemented here)');
+        const userData = {
+          id: Date.now(),
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          joinDate: new Date().toISOString()
+        };
+
+        register(userData);
+        navigate('/');
         setIsSubmitting(false);
       }, 1000);
     } else {
