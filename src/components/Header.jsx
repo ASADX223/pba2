@@ -4,14 +4,17 @@ import { useAuth } from '../contexts/AuthContext';
 
 function Header() {
   const location = useLocation();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const navigationItems = [
     { name: 'Home', path: '/' },
     { name: 'Exercises', path: '/exercises' },
     { name: 'Nutrition', path: '/nutrition' },
     { name: 'Progress', path: '/progress' },
-    { name: 'Login', path: '/login' },
-    { name: 'Register', path: '/register' },
+    ...(isAuthenticated ? [] : [
+      { name: 'Login', path: '/login' },
+      { name: 'Register', path: '/register' },
+    ])
   ];
 
   const isActiveRoute = (path) => {
