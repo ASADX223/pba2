@@ -6,12 +6,11 @@ function Header() {
 
   const navigationItems = [
     { name: 'Home', path: '/' },
-    { name: 'Workout', path: '/workout' },
     { name: 'Exercises', path: '/exercises' },
     { name: 'Nutrition', path: '/nutrition' },
     { name: 'Progress', path: '/progress' },
-    { name: 'Goals', path: '/goals' },
-    { name: 'Profile', path: '/profile' },
+    { name: 'Login', path: '/login' },
+    { name: 'Register', path: '/register' },
   ];
 
   const isActiveRoute = (path) => {
