@@ -215,6 +215,27 @@ body {
   box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
 
+.form-control.error {
+  border-color: #dc3545;
+}
+
+.form-control.error:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 2px rgba(220,53,69,0.25);
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* Exercise Cards */
 .exercise-card {
   border: 1px solid #dee2e6;
