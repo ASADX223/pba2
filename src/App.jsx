@@ -21,12 +21,11 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/workout" element={<Workout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/exercises" element={<Exercises />} />
             <Route path="/nutrition" element={<Nutrition />} />
             <Route path="/progress" element={<Progress />} />
-            <Route path="/goals" element={<Goals />} />
-            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
         <Footer />
