@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Import components
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { AuthProvider } from './contexts/AuthContext';
 
 // Import page components
 import Home from './pages/Home';
